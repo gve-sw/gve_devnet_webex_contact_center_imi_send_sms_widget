@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--
+      This is the page head - it contains info the browser uses to display the page
+      You won't see what's in the head in the page
+      Scroll down to the body element for the page content
+    -->
+  </head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+setTimeout(function() {
+        $('#successMessage').fadeOut('fast');
+    }, 5000); // <-- time in milliseconds
+setTimeout(function() {
+        $('#errorMessage').fadeOut('fast');
+    }, 5000); // <-- time in milliseconds
+</script>
+  <title>Send SMS</title>
+
+  <!-- Import the webpage's stylesheet -->
+  <link rel="stylesheet" href="../static/css/style.css" />
+
+  <!-- Import the webpage's javascript file -->
+
+
+
+  <body>
+
+    <!--
+      This is the body of the page
+      Look at the elements and see how they appear in the rendered page on the right
+      Each element is defined using tags, with < and > indicating where each one opens and closes
+      There are elements for sections of the page, images, text, and more
+      The elements include attributes referenced in the CSS for the page style
+    -->
+
+    <!-- The wrapper and content divs set margins and positioning -->
+
+    <!-- The footer holds our remix button — you can use it for structure or cut it out ✂ -->
+
+    <div class="form-popup" id="smsForm">
+
+      <form class="form-container" action="{{ url_for("sendsms")}}" method="post">
+        <h3>SMS Your Customer</h3>
+
+        <label for="SMS-Name"><b>Name</b></label>
+        <input
+          type="text"
+          placeholder="Enter Your Full Name"
+          name="SMS-Name"
+          id="SMS-Name"
+          required
+        />
+
+        <label for="SMS-Number"><b>Your Mobile SMS Number</b></label>
+        <input
+          type="text"
+          placeholder="Enter your mobile SMS number"
+          name="SMS-Number"
+          id="SMS-Number"
+          required
+        />
+
+        <label for="SMS-Message"
+          ><b>Enter the appointment information</b></label
+        >
+        <input
+          type="text"
+          placeholder="Enter the appointment informtation"
+          name="SMS-Message"
+          id="SMS-Message"
+          required
+        />
+
+        <button type="submit" class="btn">
+          Send the Appointment Information
+        </button>
+          <div id="successMessage" style="text-align:center; width:100%">
+          <font color="green">
+              {%if result_response|length %}
+            <h4>{{result_response}}</h4>
+              {% endif %}
+          </font>
+        </div>
+        <div id="errorMessage" style="text-align:center; width:100%">
+          <font color="red">
+              {%if error_response|length %}
+            <h4>{{error_response}}</h4>
+              {% endif %}
+          </font>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
